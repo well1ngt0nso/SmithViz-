@@ -30,7 +30,7 @@ function generateCircle2(cx, cy, r, con, point, svg_) {
 
 // ===========  FUNC CÍRCULOS ===========
 
-function generateCircle(cx, cy, r, con, point, svg_) {
+function generateCircle(cx, cy, r, con, point, svg_, espessura = 0.5) {
     // 1) Cria o elemento
     const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
@@ -44,7 +44,7 @@ function generateCircle(cx, cy, r, con, point, svg_) {
     circle.setAttribute("r", r); // raio
     circle.setAttribute("fill", "none");
     circle.setAttribute("stroke", con); // contorno para ficar evidente
-    circle.setAttribute("stroke-width", 1);
+    circle.setAttribute("stroke-width", espessura);
 
     // 4) ADICIONA AO LOCAL CORRETO (Compatível com antes e depois do svg-pan-zoom)
     const viewport = svg_.querySelector('.svg-pan-zoom_viewport');
@@ -172,7 +172,7 @@ function generate_arcle(cx, cy, cx2, cy2,  p, cor, ids_, inverter, svg_) {
 
     path.setAttribute("fill", "none");  
     path.setAttribute("stroke", cor);
-    path.setAttribute("stroke-width", "");
+    path.setAttribute("stroke-width", 0.5);
     
 
 

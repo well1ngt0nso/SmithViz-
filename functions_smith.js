@@ -18,7 +18,7 @@ function plot_point(R, X, Z_0, ids_, svg_, cor){
 
         console.log(a);
 
-        generateCircle(a.re*px_raio +x_center, a.im * px_raio +y_center, 5, cor, ids_, svg_); 
+        generateCircle(a.re*px_raio +x_center, a.im * px_raio +y_center, 5, cor, ids_, svg_, 1); 
 
         return a;
         

@@ -1,8 +1,11 @@
 
 // roda quando o DOM estiver pronto (porque usamos "defer" no <script>)
 document.addEventListener('DOMContentLoaded', () => {
-    const ZR2 = document.getElementById('resistencia1');
-    const ZC2 = document.getElementById('reatancia1');
+    const ZR0 = document.getElementById('resistencia1');
+    const ZC0 = document.getElementById('reatancia1');
+    
+    const ZR2 = document.getElementById('resistencia2');
+    const ZC2 = document.getElementById('reatancia2');
     const btnGerar= document.getElementById('btn-gerar');
 
     /*   cria SVG   */
@@ -33,7 +36,9 @@ document.addEventListener('DOMContentLoaded', () => {
         //const saidas   = parseInt(saidasInp.value,   10) || 0;
         const ZR2_= parseInt(ZR2.value, 10) || 0;
         const ZC2_= parseInt(ZC2.value, 10) || 0;
-        plot_point(ZR2_, ZC2_, 50, ids_points, svg, "gray");
+        const ZR0_= parseInt(ZR0.value, 10) || 0;
+
+        plot_point(ZR2_, ZC2_, ZR0_, ids_points, svg, "gray");
        
     }); 
    
@@ -75,9 +80,11 @@ function desenharRede(svg, svgNS) {
     function plot_circles_r(){ //plotagem de circulos reais
 
         var colors = "blue";
-        generateArrow(100, y_center, 1000, y_center, r = 0); // gerar eixo x
-        generateArrow(x_center, 900,x_center, 2, r = 0); //gerar eixo y
+        generateArrow(200, y_center, 900, y_center, r = 0); // gerar eixo x
+        generateArrow(x_center, 690,x_center, 2, r = 0); //gerar eixo y
         generateCircle(x_center, y_center, px_raio, "black", ids , svg); //gerar contorno circle == 1
+        generateCircle(x_center, y_center, 5, "gray", ids , svg); //MARCAÇÃO CENTRLAL
+
 
         generateCircle(generate_x(0.1),  y_center, generate_r(0.1),  colors, ids, svg);
         generateCircle(generate_x(0.2),  y_center, generate_r(0.2),  colors, ids, svg);
@@ -172,7 +179,7 @@ function desenharRede(svg, svgNS) {
         line.setAttribute('x2', x2);
         line.setAttribute('y2', y2);
         line.setAttribute('stroke', 'black');
-        line.setAttribute('stroke-width', 1);
+        line.setAttribute('stroke-width', 0.5);
         line.setAttribute('marker-end', 'url(#arrowhead)');
         svg.appendChild(line);
     }
