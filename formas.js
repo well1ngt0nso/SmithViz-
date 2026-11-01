@@ -61,6 +61,7 @@ function generateCircle(cx, cy, r, con, point, svg_, espessura = 0.5) {
 
     // 5) Guarda o id
     point.push(id);
+    return id;
 }
 
 

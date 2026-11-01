@@ -18,6 +18,36 @@ document.addEventListener('DOMContentLoaded', () => {
     ─────────── */
 
     var ids_points = []; //neurônios
+    // O "banco" de dados na memória do navegador (Array de objetos)
+    let listaDePontos = [
+        {
+            id: "1", 
+            name: "z0",// Identificador único para não misturar
+            re: 0.88,
+            im: 0.47,
+            re_n: 0,
+            im_n: 0,
+            especificacoes: {
+                cor: "blue",
+                ativo: true,
+                raio: 2,
+            }
+        }
+];
+
+
+// 1. Adicionando um ponto novo criado pelo usuário
+//adicionarPonto(1.2, 0.5, 1.2, 0.5, { cor: "blue", ativo: "true", raio: 2 }, listaDePontos);
+
+// 2. Pegando as características do ponto recém-criado (vamos supor que conhecemos o ID ou pegamos o último)
+let ultimoPonto = listaDePontos[listaDePontos.length - 1];
+pegarPontoPorId(ultimoPonto.id, listaDePontos);
+
+// 3. Apagando aquele ponto específico
+apagarPonto(ultimoPonto.id, listaDePontos);
+
+
+
 
     desenharRede(svg, svgNS);
 
@@ -38,15 +68,55 @@ document.addEventListener('DOMContentLoaded', () => {
         const ZC2_= parseInt(ZC2.value, 10) || 0;
         const ZR0_= parseInt(ZR0.value, 10) || 0;
 
-        plot_point(ZR2_, ZC2_, ZR0_, ids_points, svg, "gray");
+        plot_point("zt", ZR2_, ZC2_, ZR0_, ids_points, svg, "gray", listaDePontos);
        
     }); 
-   
+/*
+// Substitua a função salvarArquivoJson antiga por esta que fala com o Python:
+async function salvarNoServidorPython(dadosObj) {
+    try {
+        let resposta = await fetch('/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dadosObj, null, 4)
+        });
 
+        if (resposta.ok) {
+            console.log("Sucesso! O points.json foi atualizado direto na pasta.");
+        } else {
+            console.error("Erro ao salvar no servidor Python.");
+        }
+    } catch (erro) {
+        console.error("Erro de conexão com o servidor:", erro);
+    }
+}
 
+// 1. Função para carregar e mexer no JSON
+async function atualizarJson() {
+    try {
+        // Puxa o seu arquivo .json
+        let resposta = await fetch('points.json');
+        let dados = await resposta.json();
 
+        // 2. Modifica ou adiciona o que você quiser
+        dados.suaNovaChave = "Valor novo adicionado pelo JS!";
+        dados.ultimaAtualizacao = new Date().toLocaleDateString();
+
+        console.log("Dados atualizados na memória:", dados);
+
+        // 3. Em vez de chamar a função de download, chama a que envia pro Python salvar na pasta:
+        await salvarNoServidorPython(dados);
+
+    } catch (erro) {
+        console.error("Erro ao ler o JSON:", erro);
+    }
+}
+
+atualizarJson();
  
-
+*/
 });
 
 function desenharRede(svg, svgNS) {
@@ -187,8 +257,8 @@ function desenharRede(svg, svgNS) {
 
 
     function plot_test(){
-        plot_point(100, 50, 50, ids, svg, "green");  //ponto teste
-        plot_point(150, 150, 50, ids, svg, "green"); //ponto teste
+        plot_point(100, 50, 50, ids, svg, "green", listaDePontos);  //ponto teste
+        plot_point(150, 150, 50, ids, svg, "green", listaDePontos); //ponto teste
 
         generateCircle(x_center, y_center, 143, "green", ids, svg); // circulo teste//
 
