@@ -52,7 +52,7 @@ apagarPonto(ultimoPonto.id, listaDePontos);
     desenharRede(svg, svgNS);
 
 
-
+  
 
     /*  
      Botão "Adicionar ponto"
